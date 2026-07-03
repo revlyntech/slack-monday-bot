@@ -1,0 +1,34 @@
+{
+  "boards": {
+    "client-a": {
+      "channel_id": "C0BEBP4MULV",
+      "board_id": "5029590799",
+      "group_id": "topics",
+      "date_col_id": "date_mm4ttba6",
+      "status_col_id": "status",
+      "owner_col_id": "person",
+      "complete_date_col_id": "date_mm4tks8k",
+      "time_col_id": "duration_mm4t8rj3",
+      "time_spent_col_id": "numeric_mm4xmh35"
+    },
+    "check-4": {
+      "channel_id": "C0BEWU56878",
+      "board_id": "5029664108",
+      "group_id": "group_mm4xxse1",
+      "date_col_id": "date_mm4xrbkz",
+      "status_col_id": "color_mm4x9hb8",
+      "owner_col_id": "multiple_person_mm4xwn71",
+      "complete_date_col_id": "date_mm4xh9rq",
+      "time_col_id": "duration_mm4xt2h1",
+      "time_spent_col_id": "numeric_mm4xyfmj"
+    },
+    "crmdaily": {
+      "channel_id": "C0BAN8Y6JJF",
+      "board_id": "5029667106",
+      "group_id": "group_mm4xxwxp",
+      "date_col_id": "date_mm4xxr28",
+      "status_col_id": "color_mm4x81r4",
+      "owner_col_id": "multiple_person_mm4xt806"
+    }
+  }
+}
