@@ -150,7 +150,7 @@ def create_monday_board(board_name):
     time_spent_col_id = next((c["id"] for c in bd["columns"] if c["type"] == "numbers"), None)
     return {"board_id": board_id, "group_id": group_id, "date_col_id": date_col_id, "complete_date_col_id": complete_date_col_id, "status_col_id": status_col_id, "owner_col_id": owner_col_id, "time_col_id": time_col_id, "time_spent_col_id": time_spent_col_id}
 
-def create_monday_item(board_id, group_id, date_col_id, task_name, owner_name=None, due_date=None, status=None, status_col_id="status", owner_col_id="person"):
+def create_monday_item(board_id, group_id, date_col_id, task_name, owner_name=None, due_date=None, status=None, status_col_id="status", owner_col_id="person", time_spent=None, time_spent_col_id=None):
     col = {}
     if owner_name:
         uid = get_user_id(owner_name)
@@ -159,6 +159,8 @@ def create_monday_item(board_id, group_id, date_col_id, task_name, owner_name=No
     col[date_col_id] = {"date": due_date if due_date else str(date.today())}
     if status:
         col[status_col_id] = {"label": status}
+    if time_spent and time_spent_col_id:
+        col[time_spent_col_id] = time_spent
     col_json = json.dumps(json.dumps(col))
     result = run_monday("mutation { create_item(board_id: " + board_id + ", group_id: \"" + group_id + "\", item_name: " + json.dumps(task_name) + ", column_values: " + col_json + ") { id name } }")
     if "errors" in result:
@@ -277,7 +279,16 @@ def parse_task_message(message):
         due_date = str(date.today())
     if not status:
         status = "Working on it"
-    return {"task_name": task_name, "owner": owner, "due_date": due_date, "status": status}
+    time_spent = None
+    for part in parts[1:]:
+        if ":" not in part:
+            continue
+        k, _, v = part.partition(":")
+        k = k.strip().lower()
+        v = v.strip()
+        if k in ["time", "time spent", "duration"]:
+            time_spent = parse_time_from_reply("time: " + v)
+    return {"task_name": task_name, "owner": owner, "due_date": due_date, "status": status, "time_spent": time_spent}
 
 def parse_time_from_reply(message):
     import re as _re
@@ -465,7 +476,7 @@ def process_event(event, channel_id, channel_name, board_cfg):
         return
     parsed = parse_task_message(message)
     print("  Parsed:", parsed)
-    item = create_monday_item(board_id, group_id, date_col_id, task_name=parsed["task_name"], owner_name=parsed.get("owner"), due_date=parsed.get("due_date"), status=parsed.get("status"), status_col_id=status_col_id, owner_col_id=owner_col_id)
+    item = create_monday_item(board_id, group_id, date_col_id, task_name=parsed["task_name"], owner_name=parsed.get("owner"), due_date=parsed.get("due_date"), status=parsed.get("status"), status_col_id=status_col_id, owner_col_id=owner_col_id, time_spent=parsed.get("time_spent"), time_spent_col_id=time_spent_col_id)
     if item:
         thread_map[ts] = item["id"]
         save_thread_map(thread_map)
