@@ -1,14 +1,33 @@
 {
   "boards": {
-    "client-a": {
+    "client-runo": {
+      "channel_id": "C0BAG1TUZQC",
+      "board_id": "5029669043",
+      "group_id": "group_mm4xh095",
+      "date_col_id": "date_mm4xfad",
+      "complete_date_col_id": "date_mm4xd80n",
+      "status_col_id": "color_mm4xgeey",
+      "owner_col_id": "multiple_person_mm4xy02g",
+      "time_spent_col_id": "numeric_mm4xy1sy"
+    },
+    "crmdaily": {
+      "channel_id": "C0BAN8Y6JJF",
+      "board_id": "5029667106",
+      "group_id": "group_mm4xxwxp",
+      "date_col_id": "date_mm4xxr28",
+      "complete_date_col_id": null,
+      "status_col_id": "color_mm4x81r4",
+      "owner_col_id": "multiple_person_mm4xt806",
+      "time_spent_col_id": null
+    },
+    "test": {
       "channel_id": "C0BEBP4MULV",
       "board_id": "5029590799",
       "group_id": "topics",
       "date_col_id": "date_mm4ttba6",
+      "complete_date_col_id": "date_mm4tks8k",
       "status_col_id": "status",
       "owner_col_id": "person",
-      "complete_date_col_id": "date_mm4tks8k",
-      "time_col_id": "duration_mm4t8rj3",
       "time_spent_col_id": "numeric_mm4xmh35"
     },
     "check-4": {
@@ -16,19 +35,10 @@
       "board_id": "5029664108",
       "group_id": "group_mm4xxse1",
       "date_col_id": "date_mm4xrbkz",
+      "complete_date_col_id": "date_mm4xh9rq",
       "status_col_id": "color_mm4x9hb8",
       "owner_col_id": "multiple_person_mm4xwn71",
-      "complete_date_col_id": "date_mm4xh9rq",
-      "time_col_id": "duration_mm4xt2h1",
       "time_spent_col_id": "numeric_mm4xyfmj"
-    },
-    "crmdaily": {
-      "channel_id": "C0BAN8Y6JJF",
-      "board_id": "5029667106",
-      "group_id": "group_mm4xxwxp",
-      "date_col_id": "date_mm4xxr28",
-      "status_col_id": "color_mm4x81r4",
-      "owner_col_id": "multiple_person_mm4xt806"
     }
   }
 }

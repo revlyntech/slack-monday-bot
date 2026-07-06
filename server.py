@@ -26,6 +26,14 @@ def save_config():
     with open(CONFIG_FILE, "w") as f:
         json.dump(CONFIG, f, indent=2)
     reload_config()
+    try:
+        import subprocess
+        subprocess.run(["git", "add", "config.json"], check=True, capture_output=True)
+        subprocess.run(["git", "commit", "-m", "auto: update config.json"], check=True, capture_output=True)
+        subprocess.run(["git", "push"], check=True, capture_output=True)
+        print("  config.json pushed to GitHub.")
+    except Exception as e:
+        print("  GitHub push failed (non-critical):", e)
 
 def get_board_cfg_by_channel(channel_id):
     for name, cfg in CONFIG["boards"].items():
