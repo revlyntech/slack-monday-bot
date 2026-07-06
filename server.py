@@ -226,6 +226,14 @@ def post_monday_comment(item_id, text):
     comment_id = result["data"]["create_update"]["id"]
     print("  Comment posted ID:", comment_id, "text:", text[:50])
     return comment_id
+def clean_slack_text(text):
+    import re as _re
+    text = _re.sub(r'<(https?://[^|>]+)\|([^>]+)>', r'\2: \1', text)
+    text = _re.sub(r'<(https?://[^>]+)>', r'\1', text)
+    text = _re.sub(r'<@[A-Z0-9]+>', '', text)
+    text = _re.sub(r'<#[A-Z0-9]+\|([^>]+)>', r'#\1', text)
+    return text.strip()
+
 def is_task_message(message):
     return bool(re.match(r"^task[:\s]", message.strip(), re.IGNORECASE))
 
@@ -355,14 +363,14 @@ def process_event(event, channel_id, channel_name, board_cfg):
     time_col_id          = board_cfg.get("time_col_id")
     time_spent_col_id    = board_cfg.get("time_spent_col_id")
     owner_col_id   = board_cfg.get("owner_col_id", "person")
-    message     = event.get("text", "").strip()
+    message     = clean_slack_text(event.get("text", "").strip())
     ts          = event.get("ts")
     thread_ts   = event.get("thread_ts")
     subtype     = event.get("subtype")
     thread_map  = load_thread_map()
 
     if subtype == "message_changed":
-        new_message = event.get("message", {}).get("text", "").strip()
+        new_message = clean_slack_text(event.get("message", {}).get("text", "").strip())
         original_ts = event.get("message", {}).get("ts")
         thread_ts_of_edit = event.get("message", {}).get("thread_ts")
         print("\n[EDIT]", channel_name, new_message[:60])
@@ -485,7 +493,7 @@ def slack_events():
         print("Unknown channel:", channel_id)
         return jsonify({"ok": True})
     subtype = event.get("subtype")
-    message = event.get("message", {}).get("text", "").strip() if subtype == "message_changed" else event.get("text", "").strip()
+    message = clean_slack_text(event.get("message", {}).get("text", "").strip()) if subtype == "message_changed" else clean_slack_text(event.get("text", "").strip())
     if not message:
         return jsonify({"ok": True})
     threading.Thread(target=process_event, args=(event, channel_id, channel_name, board_cfg)).start()
