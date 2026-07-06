@@ -476,7 +476,6 @@ def slack_events():
     if not verify_slack_signature(request):
         return jsonify({"error": "invalid signature"}), 401
     payload = request.json
-    print("DEBUG event type:", payload.get("type"), "event:", payload.get("event", {}).get("type"), "channel:", payload.get("event", {}).get("channel"))
     if payload.get("type") == "url_verification":
         return jsonify({"challenge": payload["challenge"]})
     event = payload.get("event", {})
