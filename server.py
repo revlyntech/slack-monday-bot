@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 MONDAY_API_URL  = "https://api.monday.com/v2"
+MONDAY_WORKSPACE_ID = "2080090"
 THREAD_MAP_FILE = "thread_map.json"
 CONFIG_FILE     = "config.json"
 BOT_USER_ID     = "U0BF0UG9MA4"
@@ -127,7 +128,7 @@ def format_board_name(channel_name):
 
 def create_monday_board(board_name):
     print("  Creating board:", board_name)
-    result = run_monday("mutation { create_board(board_name: " + json.dumps(board_name) + ", board_kind: public) { id name } }")
+    result = run_monday("mutation { create_board(board_name: " + json.dumps(board_name) + ", board_kind: public, workspace_id: " + MONDAY_WORKSPACE_ID + ") { id name } }")
     if "errors" in result:
         print("  Error:", result["errors"])
         return None
