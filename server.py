@@ -335,37 +335,46 @@ def detect_status_from_reply(message, valid_labels):
                         return valid
     return None
 
+CREATING_BOARDS = set()
+
 def handle_bot_joined(channel_id):
+    global CREATING_BOARDS
     print("\n[BOT JOINED] channel:", channel_id)
+    if channel_id in CREATING_BOARDS:
+        print("  Duplicate event ignored.")
+        return
     _, existing_cfg = get_board_cfg_by_channel(channel_id)
     if existing_cfg:
         print("  Already configured.")
         return
-    channel_name = get_channel_name(channel_id)
-    if not channel_name:
-        print("  Could not fetch channel name.")
-        return
-    print("  Channel:", channel_name)
-    board_name = format_board_name(channel_name)
-    board_info = create_monday_board(board_name)
-    if not board_info:
-        post_slack_message(channel_id, "Sorry, could not create monday.com board.")
-        return
-    CONFIG["boards"][channel_name] = {
-        "channel_id": channel_id,
-        "board_id": board_info["board_id"],
-        "group_id": board_info["group_id"],
-        "date_col_id": board_info["date_col_id"],
-        "complete_date_col_id": board_info.get("complete_date_col_id"),
-        "status_col_id": board_info["status_col_id"],
-        "owner_col_id": board_info["owner_col_id"],
-        "time_col_id": board_info.get("time_col_id"),
-        "time_spent_col_id": board_info.get("time_spent_col_id")
-    }
-    save_config()
-    print("  Done. CONFIG updated in memory.")
-    post_slack_message(channel_id, "Hi! Board *" + board_name + "* created on monday.com and linked to this channel.\n\nCreate a task:\ntask: Task name | owner: John | date: 2026-07-15\n\nReply in thread to update status or add comments.")
-
+    CREATING_BOARDS.add(channel_id)
+    try:
+        channel_name = get_channel_name(channel_id)
+        if not channel_name:
+            print("  Could not fetch channel name.")
+            return
+        print("  Channel:", channel_name)
+        board_name = format_board_name(channel_name)
+        board_info = create_monday_board(board_name)
+        if not board_info:
+            post_slack_message(channel_id, "Sorry, could not create monday.com board.")
+            return
+        CONFIG["boards"][channel_name] = {
+            "channel_id": channel_id,
+            "board_id": board_info["board_id"],
+            "group_id": board_info["group_id"],
+            "date_col_id": board_info["date_col_id"],
+            "complete_date_col_id": board_info.get("complete_date_col_id"),
+            "status_col_id": board_info["status_col_id"],
+            "owner_col_id": board_info["owner_col_id"],
+            "time_col_id": board_info.get("time_col_id"),
+            "time_spent_col_id": board_info.get("time_spent_col_id")
+        }
+        save_config()
+        print("  Done. CONFIG updated.")
+        post_slack_message(channel_id, "Hi! Board *" + board_name + "* created on monday.com and linked to this channel.\n\nCreate a task:\ntask: Task name | owner: John | date: 2026-07-15\n\nReply in thread to update status or add comments.")
+    finally:
+        CREATING_BOARDS.discard(channel_id)
 def process_event(event, channel_id, channel_name, board_cfg):
     board_id       = board_cfg["board_id"]
     group_id       = board_cfg["group_id"]
