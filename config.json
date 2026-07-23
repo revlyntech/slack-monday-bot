@@ -1,5 +1,45 @@
 {
   "boards": {
+    "client-ausgtm": {
+      "channel_id": "C0B521G9Z35",
+      "board_id": "5030004946",
+      "group_id": "group_mm5bcvqm",
+      "date_col_id": "date_mm5bzghd",
+      "complete_date_col_id": "date_mm5bd5v5",
+      "status_col_id": "color_mm5bv45v",
+      "owner_col_id": "multiple_person_mm5bb1md",
+      "time_spent_col_id": "numeric_mm5bxxt9"
+    },
+    "client-irim": {
+      "channel_id": "C0B98TNC6KU",
+      "board_id": "5030004942",
+      "group_id": "group_mm5b3swn",
+      "date_col_id": "date_mm5b5vqn",
+      "complete_date_col_id": "date_mm5bntdd",
+      "status_col_id": "color_mm5bq4a0",
+      "owner_col_id": "multiple_person_mm5b8c57",
+      "time_spent_col_id": "numeric_mm5b1fyj"
+    },
+    "client-horizonx": {
+      "channel_id": "C0B992S329X",
+      "board_id": "5030004947",
+      "group_id": "group_mm5b5f2y",
+      "date_col_id": "date_mm5b8ppv",
+      "complete_date_col_id": "date_mm5bq3s7",
+      "status_col_id": "color_mm5bkkz",
+      "owner_col_id": "multiple_person_mm5bastt",
+      "time_spent_col_id": "numeric_mm5b6cc7"
+    },
+    "client-intuitive": {
+      "channel_id": "C0B9CQMAV0B",
+      "board_id": "5030004939",
+      "group_id": "group_mm5bry54",
+      "date_col_id": "date_mm5bc0ja",
+      "complete_date_col_id": "date_mm5brjds",
+      "status_col_id": "color_mm5bg4t4",
+      "owner_col_id": "multiple_person_mm5bphk6",
+      "time_spent_col_id": "numeric_mm5bcxg8"
+    },
     "client-runo": {
       "channel_id": "C0BAG1TUZQC",
       "board_id": "5029669043",
@@ -19,6 +59,56 @@
       "status_col_id": "color_mm4x81r4",
       "owner_col_id": "multiple_person_mm4xt806",
       "time_spent_col_id": null
+    },
+    "client-classical-academic-press": {
+      "channel_id": "C0BDQAFKQAZ",
+      "board_id": "5030004941",
+      "group_id": "group_mm5branv",
+      "date_col_id": "date_mm5bz931",
+      "complete_date_col_id": "date_mm5bkgw0",
+      "status_col_id": "color_mm5bnq9w",
+      "owner_col_id": "multiple_person_mm5byspp",
+      "time_spent_col_id": "numeric_mm5brm30"
+    },
+    "client-eatclub": {
+      "channel_id": "C0BF4MQM1NF",
+      "board_id": "5030004947",
+      "group_id": "group_mm5b5f2y",
+      "date_col_id": "date_mm5b8ppv",
+      "complete_date_col_id": "date_mm5bq3s7",
+      "status_col_id": "color_mm5bkkz",
+      "owner_col_id": "multiple_person_mm5bastt",
+      "time_spent_col_id": "numeric_mm5b6cc7"
+    },
+    "client-splashbi": {
+      "channel_id": "C0BFJJYNWA2",
+      "board_id": "5029773224",
+      "group_id": "group_mm52hjnp",
+      "date_col_id": "date_mm52k5q",
+      "complete_date_col_id": "date_mm523j4f",
+      "status_col_id": "color_mm526p7z",
+      "owner_col_id": "multiple_person_mm52jv55",
+      "time_spent_col_id": "numeric_mm528ca5"
+    },
+    "client-process9": {
+      "channel_id": "C0BGT0KQ971",
+      "board_id": "5030004940",
+      "group_id": "group_mm5b3hd2",
+      "date_col_id": "date_mm5b4e0s",
+      "complete_date_col_id": "date_mm5bjq98",
+      "status_col_id": "color_mm5bazak",
+      "owner_col_id": "multiple_person_mm5btbh3",
+      "time_spent_col_id": "numeric_mm5b85dn"
+    },
+    "client-properti": {
+      "channel_id": "C0BGXTZ0LHZ",
+      "board_id": "5030004945",
+      "group_id": "group_mm5b18s4",
+      "date_col_id": "date_mm5bcp5g",
+      "complete_date_col_id": "date_mm5bxfvg",
+      "status_col_id": "color_mm5bvxz5",
+      "owner_col_id": "multiple_person_mm5bckz4",
+      "time_spent_col_id": "numeric_mm5bjfw2"
     },
     "test": {
       "channel_id": "C0BEBP4MULV",
